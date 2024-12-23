@@ -1,0 +1,45 @@
+# activate conda environment ml-subapp
+/home/greystone/StorageWall/miniconda3/bin/activate && conda activate ml_subapp
+
+# command run app
+/home/greystone/StorageWall/miniconda3/envs/ml_subapp/bin/python /home/greystone/StorageWall/apps/ml-subapp/appPython/main_app.py
+
+#command test triton
+/home/greystone/StorageWall/miniconda3/envs/ml_subapp/bin/python /home/greystone/StorageWall/apps/ml-subapp/appPython/modules/realtime_detection/model_object_detect_phone_slot_triton.py
+
+#command test physical inventory triton
+/home/greystone/StorageWall/miniconda3/envs/ml_subapp/bin/python /home/greystone/StorageWall/apps/ml-subapp/appPython/modules/realtime_detection/physical_inventory_detect_phone_slot.py
+
+
+# activate ml-subap & camera
+source /home/greystone/StorageWall/miniconda3/bin/activate \
+&& conda activate ml_subapp && export LD_LIBRARY_PATH=/home/greystone/StorageWall/miniconda3/envs/ml_subapp/lib
+python3 utils/simple_live_qtwidgets/simple_live_qtwidgets.py
+
+# environment
+export: conda env export | grep -v "^prefix: " > ml_subapp_environment.yml
+create new environment: conda env create -f ml_subapp_environment.yml
+
+# run main app
+python3 main_app.py 
+
+# install ids_peak for capture image tool (optional)
+cd /usr/local/share/ids/bindings/python/wheel/
+python3 -m pip install ids_peak-1.5.0.0-cp38-cp38-linux_x86_64.whl
+python3 -m pip install ids_peak_ipl-1.6.0.0-cp38-cp38-linux_x86_64.whl
+pip install PyQt5
+pip install PySide2
+
+# export lib path to run file
+export LD_LIBRARY_PATH=/home/greystone/StorageWall/miniconda3/envs/ml_subapp/lib
+
+---
+
+sudo ./home/greystone/Desktop/Pick_pack_ship_tool/TOOL/build/Pick_Pack_Ship_toolkit_v1
+
+----
+
+sudo docker exec docker_barcode python3.7 \
+/home/greystone/StorageWall/apps/ml-subapp/appPython/modules/scan_barcode/detect_barcode_list_path_new.py \
+/home/greystone/StorageWall/ML_Analysis/scanBarcode/source/pathListImage.txt \
+/home/greystone/StorageWall/ML_Analysis/scanBarcode/result/list_scan_barcode.json

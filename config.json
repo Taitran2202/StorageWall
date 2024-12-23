@@ -1,0 +1,60 @@
+{"x_detect_phone_left_wall_from": 230, "y_detect_phone_left_wall_from": 360, "x_detect_phone_left_wall_to": 970, "y_detect_phone_left_wall_to": 510,
+"x_detect_phone_right_wall_from": 230, "y_detect_phone_right_wall_from": 360, "x_detect_phone_right_wall_to": 970, "y_detect_phone_right_wall_to": 510,
+
+"x_detect_phone_up_left_wall_from": 200, "y_detect_phone_up_left_wall_from": 100, "x_detect_phone_up_left_wall_to": 1000, "y_detect_phone_up_left_wall_to": 270,
+"x_detect_phone_up_right_wall_from": 200, "y_detect_phone_up_right_wall_from": 100, "x_detect_phone_up_right_wall_to": 1000, "y_detect_phone_up_right_wall_to": 270,
+
+"x_detect_phone_down_left_wall_from": 300, "y_detect_phone_down_left_wall_from": 590, "x_detect_phone_down_left_wall_to": 920, "y_detect_phone_down_left_wall_to": 720,
+"x_detect_phone_down_right_wall_from": 300, "y_detect_phone_down_right_wall_from": 590, "x_detect_phone_down_right_wall_to": 920, "y_detect_phone_down_right_wall_to": 720,
+
+"x_detect_phone_left_exception_from": 230, "y_detect_phone_left_exception_from": 360, "x_detect_phone_left_exception_to": 970, "y_detect_phone_left_exception_to": 510,
+"x_detect_phone_right_exception_from": 230, "y_detect_phone_right_exception_from": 360, "x_detect_phone_right_exception_to": 970, "y_detect_phone_right_exception_to": 510,
+
+"x_detect_phone_up_left_exception_from": 200, "y_detect_phone_up_left_exception_from": 100, "x_detect_phone_up_left_exception_to": 1000, "y_detect_phone_up_left_exception_to": 270,
+"x_detect_phone_up_right_exception_from": 200, "y_detect_phone_up_right_exception_from": 100, "x_detect_phone_up_right_exception_to": 1000, "y_detect_phone_up_right_exception_to": 270,
+
+"x_detect_phone_down_left_exception_from": 300, "y_detect_phone_down_left_exception_from": 590, "x_detect_phone_down_left_exception_to": 920, "y_detect_phone_down_left_exception_to": 720,
+"x_detect_phone_down_right_exception_from": 300, "y_detect_phone_down_right_exception_from": 590, "x_detect_phone_down_right_exception_to": 920, "y_detect_phone_down_right_exception_to": 720,
+
+
+"x_detect_phone_input_dock_from": 1450, "y_detect_phone_input_dock_from": 515, "x_detect_phone_input_dock_to": 2750, "y_detect_phone_input_dock_to": 2815,
+
+"x_detect_phone_kangaroo_from": 330, "y_detect_phone_kangaroo_from": 50, "x_detect_phone_kangaroo_to": 870, "y_detect_phone_kangaroo_to": 550,
+"path_image_home_of_kangaroo": "/home/greystone/StorageWall/apps/ml-subapp/appPython/images/kangaroo_origin.png",
+"x_from_kangaroo_1": 100, "x_to_kangaroo_1": 420, "y_from_kangaroo_1": 420, "y_to_kangaroo_1": 580,
+"x_from_kangaroo_2": 800, "x_to_kangaroo_2": 1120, "y_from_kangaroo_2": 415, "y_to_kangaroo_2": 575,
+
+"x_up_from_wall_left_1": 20, "x_up_to_wall_left_1": 340, "y_up_from_wall_left_1": 220, "y_up_to_wall_left_1": 400,
+"x_up_from_wall_left_2": 820, "x_up_to_wall_left_2": 1140, "y_up_from_wall_left_2": 220, "y_up_to_wall_left_2": 400,
+"x_up_from_wall_right_1": 20, "x_up_to_wall_right_1": 340, "y_up_from_wall_right_1": 220, "y_up_to_wall_right_1": 400,
+"x_up_from_wall_right_2": 820, "x_up_to_wall_right_2": 1140, "y_up_from_wall_right_2": 220, "y_up_to_wall_right_2": 400,
+
+"x_from_wall_left_1": 80, "x_to_wall_left_1": 400, "y_from_wall_left_1": 450, "y_to_wall_left_1": 650,
+"x_from_wall_left_2": 800, "x_to_wall_left_2": 1120, "y_from_wall_left_2": 450, "y_to_wall_left_2": 650,
+"x_from_wall_right_1": 80, "x_to_wall_right_1": 400, "y_from_wall_right_1": 490, "y_to_wall_right_1": 690,
+"x_from_wall_right_2": 800, "x_to_wall_right_2": 1120, "y_from_wall_right_2": 490, "y_to_wall_right_2": 690,
+
+"x_down_from_wall_left_1": 100, "x_down_to_wall_left_1": 420, "y_down_from_wall_left_1": 640, "y_down_to_wall_left_1": 820,
+"x_down_from_wall_left_2": 780, "x_down_to_wall_left_2": 1100, "y_down_from_wall_left_2": 640, "y_down_to_wall_left_2": 820,
+"x_down_from_wall_right_1": 100, "x_down_to_wall_right_1": 420, "y_down_from_wall_right_1": 680, "y_down_to_wall_right_1": 860,
+"x_down_from_wall_right_2": 780, "x_down_to_wall_right_2": 1100, "y_down_from_wall_right_2": 680, "y_down_to_wall_right_2": 860,
+
+"x_center_point_left": 575, "y_center_point_left": 580, "rotation_org_left": 0,
+"x_center_point_right": 575, "y_center_point_right": 580, "rotation_org_right": 0,
+
+"offset_left": 25, "offset_right": 25, "offset_top": 20, "offset_bot": 15, "offset_rotation": 4,
+
+"position_tilted_upward": 440, "position_tilted_downward": 660,
+
+"ratio_pixel_2_mm": 0.16178,
+
+"misaligned_limit": 5,
+
+"physical_inventory_mode": "GPU",
+"quantity_row": 79, "quantity_column": 39,
+"x_min_wall_left": 256, "x_max_wall_left": 5663, "y_min_wall_left": -67, "y_max_wall_left": 3407,
+"x_min_wall_right": 32, "x_max_wall_right": 5438, "y_min_wall_right": -66, "y_max_wall_right": 3402,
+
+"org_x": 10, "org_y": 10, "org_rotation": 10, 
+"limit_left": 10, "limit_right": 10, "limit_top": 10, "limit_bot": 10, "limit_angle": 10
+}

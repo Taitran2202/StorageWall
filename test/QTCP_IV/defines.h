@@ -1,0 +1,8 @@
+#ifndef DEFINES_H
+#define DEFINES_H
+
+#define MODULE_QLOGGER "logger"
+#define QLOGGER_MAX_LOG_DIR_NUM_OF_FILE 100
+#define QLOGGER_MAX_LOG_DIR_SIZE 1*1024*1024*1024
+
+#endif // DEFINES_H

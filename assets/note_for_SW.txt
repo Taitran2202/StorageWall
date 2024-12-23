@@ -1,0 +1,215 @@
+II. FOR SW
+
+0. Chạy ml-subapp (Tắt nếu 10s không có Client giao tiếp)
+CMD:
+/home/greystone/StorageWall/miniconda3/envs/ml_subapp/bin/python /home/greystone/LC/ml-sub-storage-wall/main_app.py
+
+1. Mở tool chạy scan barcode
+CMD:
+sudo /home/greystone/LC/tool_scan_barcode
+
+2. Mở tool chạy detect phone slot
+CMD:
+sudo /home/greystone/LC/tool_phone_slot
+
+3. Cài docker
+CMD:
+sudo apt update
+
+sudo apt install -y \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
+
+
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+
+echo "deb [signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+sudo apt update
+
+sudo apt install -y docker-ce docker-ce-cli containerd.io
+
+sudo usermod -aG docker $USER
+
+newgrp docker
+
+docker --version
+
+docker run hello-world
+
+sudo systemctl status docker
+
+
+Stop docker
+
+
+4. Check docker image exist
+sudo docker images -q docker_barcode:test
+=> Neu ko co data ID tra ra thi load và tạo docker image từ file nén docker_barcode
+CMD:
+sudo docker load -i /home/greystone/LC/docker_barcode.tar.gz
+
+
+5. Check container contain docker_barcode running
+CMD:
+sudo docker container inspect -f '{{.State.Running}}' docker_barcode
+=> Neu result la false thi run docker contain
+CMD:
+
+docker ps -a | grep docker_barcode
+
+
+3. Khởi tạo docker container docker_barcode
+CMD:
+sudo docker run -e LD_PRELOAD=/usr/local/lib/faketime/libfaketime.so.1 \
+-e FAKETIME="2021-05-12 10:30:00" \
+-it -d --network none --name docker_barcode -v/home/greystone:/home/greystone docker_barcode:test
+
+4. Chạy thử để test docker_barcode
+sudo docker exec docker_barcode python3.7 \
+/home/greystone/LC/ml-sub-storage-wall/modules/scan_barcode/detect_barcode_list_path.py \
+/home/greystone/LC/list_scan_barcode.txt \
+/home/greystone/LC/debug/output.json
+
+
+3. Cài đặt docker triton
+==> Check cuda version, ubuntu version:
+CMD:
+nvidia-smi
+lsb_release -a
+
+==> truy cập trang : docs.nvidia.com/deeplearning/triton-inference-server/release-notes/
+==> tìm phiên bản triton phù hợp với version cuda + ubuntu
+==> pull docker về máy:
+CMD:
+docker pull nvcr.io/nvidia/tritonserver:23.04-py3            # ví dụ với version triton 23.04
+
+
+4. Khởi tạo doker container triton_server
+==> tạo thư mục chứa model chạy trên triton
+==> khởi tạo
+CMD:		
+echo greystone | sudo -S docker run -id --gpus device=all --rm -p8000:8000 -p8001:8001 -p8002:8002 -v /home/greystone/StorageWall/model_template/Model_Triton:/models --name triton_server nvcr.io/nvidia/tritonserver:23.10-py3 tritonserver --model-repository=/models --strict-model-config=false --model-control-mode=explicit
+
+5. Check container contain triton_server running
+CMD:
+sudo docker container inspect -f '{{.State.Running}}' triton_server
+=> Neu result la false thi run docker contain
+CMD:
+
+docker ps -a | grep triton_server
+
+6. Cai dat thu vien triton Client
+
+$ /home/greystone/StorageWall/miniconda3/envs/ml_subapp/bin/python /home/greystone/StorageWall/miniconda3/envs/ml_subapp/bin/pip install tritonclient[all]
+
+
+I. FOR ML
+1. COPY folder LC
+
+2. Cài miniconda3 vào đường dẫn /home/greystone
+CMD: 
+bash ./Miniconda3-py38_22.11.1-1-Linux-x86_64.sh
+
+3. Cài môi trường ml_subapp vào miniconda3
+CMD: 
+cd ~/LC/ml-sub-storage-wall
+
+source /home/greystone/miniconda3/bin/activate
+
+conda env create -f ml_subapp_environment.yml
+
+*Note:
+conda install nomkl numpy scipy scikit-learn numexpr
+conda remove mkl mkl-service
+
+
+4. Cài docker
+CMD:
+sudo apt update
+
+sudo apt install -y \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
+
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+
+echo "deb [signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+sudo apt update
+sudo apt install -y docker-ce docker-ce-cli containerd.io
+
+sudo usermod -aG docker $USER
+
+newgrp docker
+
+docker --version
+
+docker run hello-world
+
+sudo systemctl status docker
+
+5. Load và tạo docker image từ file nén docker_barcode
+CMD:
+cd /home/greystone/StorageWall/model_template/ScanBarcode
+
+sudo docker load -i docker_barcode.tar.gz
+
+6. Load và tạo docker image từ file nén docker_barcode
+CMD:
+cd ~/LC
+
+sudo docker load -i docker_barcode.tar.gz
+
+7. Khởi tạo docker container docker_barcode
+CMD:
+sudo docker run -e LD_PRELOAD=/usr/local/lib/faketime/libfaketime.so.1 \
+-e FAKETIME="2021-05-12 10:30:00" \
+-it -d --network none --name docker_barcode -v/home/greystone:/home/greystone docker_barcode:test
+
+8. Chạy thử để test docker_barcode
+sudo docker exec docker_barcode python3.7 \
+/home/greystone/LC/ml-sub-storage-wall/modules/scan_barcode/detect_barcode_list_path.py \
+/home/greystone/LC/list_scan_barcode.txt \
+/home/greystone/LC/debug/output.json
+
+
+9. Add permission docker group
+sudo groupadd -f docker
+sudo usermod -aG docker $USER
+newgrp docker
+
+10. Cài đặt docker triton
+==> Check cuda version, ubuntu version:
+CMD:
+nvidia-smi
+lsb_release -a
+
+==> truy cập trang : docs.nvidia.com/deeplearning/triton-inference-server/release-notes/
+==> tìm phiên bản triton phù hợp với version cuda + ubuntu
+==> pull docker về máy:
+CMD:
+docker pull nvcr.io/nvidia/tritonserver:23.04-py3            # ví dụ với version triton 23.04
+
+
+11. Khởi tạo doker container triton_server
+==> tạo thư mục chứa model chạy trên triton
+==> khởi tạo
+CMD:		
+echo greystone | sudo -S docker run -id --gpus device=0 --rm -p8000:8000 -p8001:8001 -p8002:8002 -v /home/greystone/StorageWall/model_template/Model_Triton:/models --name triton_server nvcr.io/nvidia/tritonserver:23.10-py3 tritonserver --model-repository=/models --strict-model-config=false --model-control-mode=explicit
+
+12. Check container contain triton_server running
+CMD:
+sudo docker container inspect -f '{{.State.Running}}' triton_server
+=> Neu result la false thi run docker contain
+CMD:
+
+docker ps -a | grep triton_server	
+
+

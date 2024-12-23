@@ -1,0 +1,6 @@
+outs:
+- md5: 7420e48822ede9235de079abfb9770f6.dir
+  size: 1043660513
+  nfiles: 1348
+  hash: md5
+  path: model_detect_phone_buffer

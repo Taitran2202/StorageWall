@@ -1,0 +1,34 @@
+1. Requirement
+python=3.8
+pip install labelme2yolo
+pip install ultralytics
+
+2. Labeling
+tool lableme
+label phone type polygon
+
+3. Augment data
+
+4. Train
+
+- activate train environment: source /home/greystone/miniconda3/bin/activate && conda activate yolov8
+
+- convert lableme annotation to yolo annotation: labelme2yolo --json_dir dataset/model_detect_phone_slot/images_aug/val/annotations --val_size 0.0 --test_size 0.0
+
+- convert lableme annotation to yolo annotation: labelme2yolo --json_dir dst --val_size 0.0 --test_size 0.0
+
+- command train: 
+yolo task=segment \
+mode=train epochs=100 data=./dataset/model_detect_phone_slot/dataset.yaml \
+model=yolov8x-seg.pt imgsz=640 batch=8 patience=5
+
+
+5. Batch Test
+
+6. Export onnx
+yolo export model=runs/segment/train/weights/best.pt format=onnx
+
+*Note:
+Release files: model_detect_phone_slot.pt + model_detect_phone_slot.yaml
+
+MODEL_NAME: model_detect_phone_slot

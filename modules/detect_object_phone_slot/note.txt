@@ -1,0 +1,23 @@
+python3 modules/detect_object_phone_slot/script_augment_labelimg.py \
+dataset/model_object_detect_phone_slot/data/train 1000
+
+python3 modules/detect_object_phone_slot/script_augment_labelimg.py \
+dataset/model_object_detect_phone_slot/data/val 100
+
+python3 modules/detect_object_phone_slot/script_convert_voc_2_yolo.py \
+    dataset/model_object_detect_phone_slot/dataset/train/xmls \
+        dataset/model_object_detect_phone_slot/dataset/train/images
+
+python3 modules/detect_object_phone_slot/script_convert_voc_2_yolo.py \
+    dataset/model_object_detect_phone_slot/dataset/val/xmls \
+        dataset/model_object_detect_phone_slot/dataset/val/images
+
+
+yolo task=detect \
+mode=train epochs=100 data=./dataset.yaml \
+model=yolov8x.pt imgsz=640 batch=8 \
+patience=5
+
+yolo export model=dataset/model_object_detect_phone_slot/models/v3/best.pt format=onnx
+
+MODEL_NAME: model_object_detect_phone_slot

@@ -1,0 +1,30 @@
+1. Check docker image exist
+sudo docker images -q docker_barcode:test
+=> Neu ko co data ID tra ra thi load và tạo docker image từ file nén docker_barcode
+CMD:
+sudo docker load -i /home/greystone/LC/docker_barcode.tar.gz
+
+2. Check docker container exist
+docker ps -a | grep docker_barcode
+=> Neu ko co data ID
+CMD:
+sudo docker run -e LD_PRELOAD=/usr/local/lib/faketime/libfaketime.so.1 \
+-e FAKETIME="2021-05-12 10:30:00" \
+-it -d --network none --name docker_barcode -v/home/greystone:/home/greystone docker_barcode:test &
+
+3. Check container docker_barcode running
+sudo docker container inspect -f '{{.State.Running}}' docker_barcode
+=> Neu result la false thi run docker contain
+CMD:
+docker start docker_barcode
+
+                QVariantMap mapRequest;
+                mapRequest["pathToDebug"] = pathResult;
+                mapRequest["pathToImg"] = ;
+                mapRequest["pathToList"] = /home/greystone/LC/list_scan_barcode.txt;
+                mapRequest["pathToResult"] = pathFileResult;
+                mapRequest["requestType"] = QString("detect_phone_slot");
+                
+                
+                
+

@@ -1,0 +1,6 @@
+outs:
+- md5: 0d975e324796df6fcab1c3cd4e52fd7b.dir
+  size: 310940001
+  nfiles: 7286
+  hash: md5
+  path: model_detect_magnetic

@@ -1,0 +1,6 @@
+outs:
+- md5: 8ab4cd1306d239105aefc4887801a4ba.dir
+  size: 2131150318
+  nfiles: 7752
+  hash: md5
+  path: model_object_detect_phone_slot

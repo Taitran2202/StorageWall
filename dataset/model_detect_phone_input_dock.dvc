@@ -1,0 +1,6 @@
+outs:
+- md5: c2c9d14460124ae8c6ce0bdb8900b5e5.dir
+  size: 698151183
+  nfiles: 784
+  hash: md5
+  path: model_detect_phone_input_dock

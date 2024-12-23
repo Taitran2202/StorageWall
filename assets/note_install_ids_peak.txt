@@ -1,0 +1,85 @@
+# install gdebi
+
+sudo add-apt-repository universe
+
+sudo apt-get update
+
+sudo apt-get install gdebi-core
+
+gdebi --version
+
+# install ids-peak-with-ueyetl-linux-x86-2.3.0.0-64
+
+sudo gdebi ids-peak-with-ueyetl-linux-x86-2.3.0.0-64.deb
+==>
+sudo gdebi debs/ueye-api_4.96.1.2054_amd64.deb 
+
+sudo gdebi debs/ueye-common_4.96.1.2054_amd64.deb 
+
+sudo gdebi debs/ueye-driver-usb_4.96.1.2054_amd64.deb 
+
+sudo gdebi debs/ueye-driver-eth_4.96.1.2054_amd64.deb 
+
+sudo gdebi debs/ueye-drivers_4.96.1.2054_amd64.deb 
+
+# isntall idscameramanager
+
+==>
+sudo gdebi debs/ueye-demos_4.96.1.2054_amd64.deb 
+
+sudo gdebi debs/ueye-dev_4.96.1.2054_amd64.deb
+
+sudo gdebi debs/ueye-manual-de_4.96.1.2054_amd64.deb
+
+sudo gdebi debs/ueye-manual-en_4.96.1.2054_amd64.deb 
+
+sudo gdebi debs/ueye-tools-cli_4.96.1.2054_amd64.deb
+
+sudo gdebi debs/ueye-tools-qt5_4.96.1.2054_amd64.deb 
+
+sudo gdebi debs/ueye_4.96.1.2054_amd64.deb
+
+
+# python
+cd /usr/local/share/ids/bindings/python/wheel/
+python3 -m pip install ids_peak-1.5.0.0-cp38-cp38-linux_x86_64.whl
+python3 -m pip install ids_peak_ipl-1.6.0.0-cp38-cp38-linux_x86_64.whl
+
+# export lib path
+export LD_LIBRARY_PATH=/home/greystone/miniconda3/envs/py38/lib
+
+
+
+# uninstall
+Uninstalling the debian packages
+To uninstall the packages, use
+[user@pc]$ sudo apt-get remove "ueye*"
+This removes the packages but not the dependencies or the configuration files.
+You can remove the "ueye" meta package from your system. Other installed packages such as "ueye-driver-usb" will still remain installed.
+To remove the packages and their dependencies, use:
+[user@pc]$ sudo apt-get autoremove "ueye*"
+Uninstalling the archive
+To uninstall all, run as root:
+[user@pc]$ sudo /usr/bin/ueyesetup -u all
+To uninstall GigE uEye variant, run as root:
+[user@pc]$ sudo /usr/bin/ueyesetup -u eth
+To uninstall USB uEye variant, run as root:
+[user@pc]$ sudo /usr/bin/ueyesetup -u usb
+You should always use the setup script that came with the previous installation to ensure proper system cleanup. Do not attempt to remove the IDS Software Suite manually.
+
+
+https://en.ids-imaging.com/files/downloads/ids-software-suite/readme/readme-ids-software-suite-linux-4.95.1_EN.html#uninstallation
+
+
+Debian packages
+Using "sudo"
+Keep the configuration file of the IDS peak Cockpit
+[user@pc]$ sudo apt-get remove ids-peak
+Delete the configuration file of the IDS peak Cockpit
+[user@pc]$ sudo apt-get purge ids-peak
+
+Archive
+Run the ids_uninstall_udev_rule.sh in the folder "/opt/ids-peak_[version]_[arch]/local/scripts" to remove the udev rule or remove it manually.
+
+https://en.ids-imaging.com/files/downloads/ids-peak/readme/ids-peak-linux-readme-2.2_EN.html
+
